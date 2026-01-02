@@ -1,16 +1,17 @@
 <?php
-require_once 'includes/config.php';
-require_once 'includes/functions.php';
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/functions.php';
 
-$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
+$slug = $_GET['slug'] ?? '';
 $category = getCategoryBySlug($slug);
 
 if (!$category) {
     header('Location: blog.php');
-    exit;
+    exit();
 }
 
-$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$page = $_GET['page'] ?? 1;
+$page = max(1, intval($page));
 $limit = POSTS_PER_PAGE;
 $offset = ($page - 1) * $limit;
 
@@ -19,7 +20,7 @@ $total_posts = countPosts($category['id']);
 $total_pages = ceil($total_posts / $limit);
 
 $page_title = $category['meta_title'] ?: $category['name'];
-include 'includes/header.php';
+include __DIR__ . '/includes/header.php';
 ?>
 
 <div class="container">
@@ -75,4 +76,4 @@ include 'includes/header.php';
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>
