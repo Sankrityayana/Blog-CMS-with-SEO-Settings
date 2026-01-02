@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/config.php';
 require_once 'includes/functions.php';
 
 $slug = isset($_GET['slug']) ? $_GET['slug'] : '';
