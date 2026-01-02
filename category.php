@@ -25,9 +25,9 @@ include __DIR__ . '/includes/header.php';
 
 <div class="container">
     <div class="page-header">
-        <h1><?php echo $category['name']; ?></h1>
+        <h1><?php echo htmlspecialchars($category['name']); ?></h1>
         <?php if ($category['description']): ?>
-            <p><?php echo $category['description']; ?></p>
+            <p><?php echo htmlspecialchars($category['description']); ?></p>
         <?php endif; ?>
     </div>
 
@@ -41,19 +41,19 @@ include __DIR__ . '/includes/header.php';
                 <article class="post-card">
                     <?php if ($post['featured_image']): ?>
                         <div class="post-image">
-                            <img src="<?php echo $post['featured_image']; ?>" alt="<?php echo htmlspecialchars($post['title']); ?>">
+                            <img src="<?php echo htmlspecialchars($post['featured_image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>">
                         </div>
                     <?php endif; ?>
                     <div class="post-content">
                         <div class="post-meta">
                             <span class="date"><?php echo formatDate($post['publish_date']); ?></span>
                         </div>
-                        <h2><a href="post.php?slug=<?php echo $post['slug']; ?>"><?php echo htmlspecialchars($post['title']); ?></a></h2>
-                        <p><?php echo getExcerpt($post['excerpt'] ?: $post['content']); ?></p>
+                        <h2><a href="post.php?slug=<?php echo urlencode($post['slug']); ?>"><?php echo htmlspecialchars($post['title']); ?></a></h2>
+                        <p><?php echo htmlspecialchars(getExcerpt($post['excerpt'] ?: $post['content'])); ?></p>
                         <div class="post-footer">
-                            <span class="author">By <?php echo $post['author_full_name']; ?></span>
+                            <span class="author">By <?php echo htmlspecialchars($post['author_full_name']); ?></span>
                             <span>•</span>
-                            <span><?php echo $post['comment_count']; ?> comments</span>
+                            <span><?php echo intval($post['comment_count']); ?> comments</span>
                         </div>
                     </div>
                 </article>
@@ -62,13 +62,13 @@ include __DIR__ . '/includes/header.php';
             <?php if ($total_pages > 1): ?>
                 <div class="pagination">
                     <?php if ($page > 1): ?>
-                        <a href="?slug=<?php echo $slug; ?>&page=<?php echo $page - 1; ?>" class="btn">← Previous</a>
+                        <a href="?slug=<?php echo urlencode($slug); ?>&page=<?php echo $page - 1; ?>" class="btn">← Previous</a>
                     <?php endif; ?>
                     
-                    <span class="page-info">Page <?php echo $page; ?> of <?php echo $total_pages; ?></span>
+                    <span class="page-info">Page <?php echo intval($page); ?> of <?php echo intval($total_pages); ?></span>
                     
                     <?php if ($page < $total_pages): ?>
-                        <a href="?slug=<?php echo $slug; ?>&page=<?php echo $page + 1; ?>" class="btn">Next →</a>
+                        <a href="?slug=<?php echo urlencode($slug); ?>&page=<?php echo $page + 1; ?>" class="btn">Next →</a>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
