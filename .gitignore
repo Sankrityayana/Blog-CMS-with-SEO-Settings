@@ -1,0 +1,28 @@
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# Config
+config_local.php
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependencies
+vendor/
+node_modules/
+
+# Cache
+cache/
+*.cache
